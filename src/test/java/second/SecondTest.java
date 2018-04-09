@@ -22,13 +22,13 @@ public class SecondTest extends BaseTest {
         new Select(chromeDriver.findElement(By.xpath("//*[@name='toPort']"))).selectByValue(destination);
         chromeDriver.findElement(By.cssSelector("input.btn")).click();
 
-        // TODO заменить говнолокатор
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".table")));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= 'Flights from " +
+                departure + " to " + destination + ": ']")));
 
         // TODO подумать, как уменьшить кол-во кода
         ArrayList<WebElement> pricesElem = (ArrayList<WebElement>) chromeDriver.findElements(By.xpath("//input[@name='price']"));
         ArrayList priceInt = new ArrayList();
-        for (WebElement price: pricesElem) {
+        for (WebElement price : pricesElem) {
             priceInt.add(Integer.parseInt((price.getAttribute("value")).replace(".", "")));
         }
         WebElement elemMin = pricesElem.get(priceInt.indexOf(Collections.min(priceInt)));
