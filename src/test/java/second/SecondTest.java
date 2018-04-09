@@ -4,12 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class SecondTest extends BaseTest {
 
@@ -34,7 +32,7 @@ public class SecondTest extends BaseTest {
         WebElement elemMin = pricesElem.get(priceInt.indexOf(Collections.min(priceInt)));
         elemMin.findElement(By.xpath("./..//input[@value='Choose This Flight']")).click();
 
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#inputName")));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#inputName")));
 
         chromeDriver.findElement(By.cssSelector("#inputName")).sendKeys("Andrey");
         chromeDriver.findElement(By.cssSelector("#address")).sendKeys("Street, 123");
