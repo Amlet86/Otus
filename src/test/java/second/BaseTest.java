@@ -19,6 +19,7 @@ public class BaseTest {
     @BeforeClass
     public void beforeClass() {
         chromeDriver = new ChromeDriver();
+        chromeDriver.manage().window().maximize();
         chromeDriver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(chromeDriver, timeout);
         chromeDriver.get("http://blazedemo.com/");
