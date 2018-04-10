@@ -6,8 +6,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -110,7 +113,11 @@ public class SecondTest extends BaseTest {
         String cardNumAct = cardNumElem.getText().replace("x", "");
         assertTrue(cardNumber.contains(cardNumAct), "Error: card number is incorrect.");
 
-        System.out.println(cardNumAct);
+        ZoneId zoneZero = ZoneId.of("+0000");
+        ZonedDateTime now = ZonedDateTime.now(zoneZero);
+// Tue, 10 Apr 2018 13:50:01 +0000
+
+        System.out.println(now);
 
     }
 }
