@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -97,6 +99,8 @@ public class SecondTest extends BaseTest {
         creditCardYear.clear();
         creditCardYear.sendKeys("0000");
         chromeDriver.findElement(By.cssSelector("#nameOnCard")).sendKeys("AndreyM");
+//        ZoneId zoneZero = ZoneId.of("+0000");
+//        ZonedDateTime now = ZonedDateTime.now(zoneZero);
         chromeDriver.findElement(By.xpath("//input[@value='Purchase Flight']")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= " +
@@ -113,11 +117,11 @@ public class SecondTest extends BaseTest {
         String cardNumAct = cardNumElem.getText().replace("x", "");
         assertTrue(cardNumber.contains(cardNumAct), "Error: card number is incorrect.");
 
-        ZoneId zoneZero = ZoneId.of("+0000");
-        ZonedDateTime now = ZonedDateTime.now(zoneZero);
-// Tue, 10 Apr 2018 13:50:01 +0000
+        String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z");
 
-        System.out.println(now);
-
+        System.out.println(dateElem);
+        System.out.println(formatForDateNow.format(dateNow));
     }
 }
