@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class SecondTest extends BaseTest {
 
@@ -107,9 +108,8 @@ public class SecondTest extends BaseTest {
 
         WebElement cardNumElem = chromeDriver.findElement(By.xpath("//*[text()='Card Number']/following-sibling::*"));
         String cardNumAct = cardNumElem.getText().replace("x", "");
-        if(!cardNumber.contains(cardNumAct)) {
-            System.out.println("Error: card number is incorrect.");
-        }
+        assertTrue(cardNumber.contains(cardNumAct), "Error: card number is incorrect.");
+
         System.out.println(cardNumAct);
 
     }
