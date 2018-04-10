@@ -26,7 +26,7 @@ public class BaseTest {
     }
 
     @AfterClass
-    public void afterClass(){
-//        chromeDriver.quit();
+    public void afterClass() {
+        chromeDriver.quit();
     }
 }
