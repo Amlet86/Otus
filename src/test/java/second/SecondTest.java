@@ -6,15 +6,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class SecondTest extends BaseTest {
@@ -24,14 +20,6 @@ public class SecondTest extends BaseTest {
     private String cardNumber = "0123456789";
     private float taxes = 514.76f;
     private String currency = "USD";
-
-    public String getDeparture() {
-        return departure;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
 
     public void setDeparture(String departure) {
         this.departure = departure;
@@ -62,7 +50,7 @@ public class SecondTest extends BaseTest {
         }
         WebElement elemMin = pricesWE.get(priceFloat.indexOf(Collections.min(priceFloat)));
         /*
-        Сохранение параметров и выбор самого дешевого рейса
+        Сохранение параметров и выбор рейса
          */
         String flight = elemMin.findElement(By.xpath("./..//input[@name='flight']")).getAttribute("value");
         String airline = elemMin.findElement(By.xpath("./..//input[@name='airline']")).getAttribute("value");
@@ -74,14 +62,18 @@ public class SecondTest extends BaseTest {
         /*
         Сравнение параметров из таблицы рейсов со страницей резервирования
          */
-        webDriverWait.until(ExpectedConditions.textToBe(By.xpath("//div[2]/p[1]"), "Airline: " + airline));
-        webDriverWait.until(ExpectedConditions.textToBe(By.xpath("//div[2]/p[2]"), "Flight Number: " + flight));
-        webDriverWait.until(ExpectedConditions.textToBe(By.xpath("//div[2]/p[3]"), "Price: " + price));
+        assertEquals(chromeDriver.findElement(By.xpath("//div[2]/p[1]")).getText(), "Airline: " + airline,
+                "Error: airline is incorrect.");
+        assertTrue(chromeDriver.findElement(By.xpath("//div[2]/p[2]")).getText().contains(flight),
+                "Error: flight number is incorrect.");
+        assertFalse(!chromeDriver.findElement(By.xpath("//div[2]/p[3]")).getText().contains(price),
+                "Error: price is incorrect.");
         /*
-        Величина taxes вынесена в переменную, чтобы не переплачивать, если тут окажется $100500
+        Значение taxes вынесено в переменную, чтобы не переплачивать, если система подставит $100500
          */
         String totalCost = String.valueOf(Float.parseFloat(price) + taxes);
-        webDriverWait.until(ExpectedConditions.textToBe(By.xpath("//em"), totalCost));
+        assertEquals(chromeDriver.findElement(By.xpath("//em")).getText(), totalCost,
+                "Error: total cost is incorrect.");
         /*
         Заполняем страницу резервирования
          */
@@ -90,7 +82,8 @@ public class SecondTest extends BaseTest {
         chromeDriver.findElement(By.cssSelector("#city")).sendKeys("S-Pb");
         chromeDriver.findElement(By.cssSelector("#state")).sendKeys("SZFO");
         chromeDriver.findElement(By.cssSelector("#zipCode")).sendKeys("0123456789");
-        new Select(chromeDriver.findElement(By.cssSelector("#cardType"))).selectByValue("amex");
+        int randomCardType = new Random().nextInt(3);
+        new Select(chromeDriver.findElement(By.cssSelector("#cardType"))).selectByIndex(randomCardType);
         chromeDriver.findElement(By.cssSelector("#creditCardNumber")).sendKeys(cardNumber);
         WebElement creditCardMonth = chromeDriver.findElement(By.cssSelector("#creditCardMonth"));
         creditCardMonth.clear();
@@ -99,9 +92,14 @@ public class SecondTest extends BaseTest {
         creditCardYear.clear();
         creditCardYear.sendKeys("0000");
         chromeDriver.findElement(By.cssSelector("#nameOnCard")).sendKeys("AndreyM");
-//        ZoneId zoneZero = ZoneId.of("+0000");
-//        ZonedDateTime now = ZonedDateTime.now(zoneZero);
         chromeDriver.findElement(By.xpath("//input[@value='Purchase Flight']")).click();
+        String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
+        /*
+        Создаём дату с определённым форматом и изменением TimeZone на GMT 0
+         */
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        formatForDateNow.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+        String dateNow = formatForDateNow.format(new Date());
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= " +
                 "'Thank you for your purchase today!']")));
@@ -117,11 +115,8 @@ public class SecondTest extends BaseTest {
         String cardNumAct = cardNumElem.getText().replace("x", "");
         assertTrue(cardNumber.contains(cardNumAct), "Error: card number is incorrect.");
 
-        String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z");
+        assertEquals(dateElem, dateNow, "Cry: hard issue with '*' again false!");
 
-        System.out.println(dateElem);
-        System.out.println(formatForDateNow.format(dateNow));
+        System.out.println("Информация о бронировании Id " + id + " не была сохранена.");
     }
 }
