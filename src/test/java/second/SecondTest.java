@@ -17,8 +17,16 @@ public class SecondTest extends BaseTest {
 
     private String departure = "Philadelphia";
     private String destination = "New York";
-    private String cardNumber = "0123456789";
     private float taxes = 514.76f;
+    private String firstName = "Andrey";
+    private String lastName = "Mikhaylov";
+    private String address = "Street, 123";
+    private String city = "Street, 123";
+    private String state = "SZFO";
+    private String zipCode = "178178";
+    private String cardMonth = "99";
+    private String cardYear = "0000";
+    private String cardNumber = "0123456789";
     private String currency = "USD";
 
     public void setDeparture(String departure) {
@@ -77,23 +85,22 @@ public class SecondTest extends BaseTest {
         /*
         Заполняем страницу резервирования
          */
-        chromeDriver.findElement(By.cssSelector("#inputName")).sendKeys("Andrey");
-        chromeDriver.findElement(By.cssSelector("#address")).sendKeys("Street, 123");
-        chromeDriver.findElement(By.cssSelector("#city")).sendKeys("S-Pb");
-        chromeDriver.findElement(By.cssSelector("#state")).sendKeys("SZFO");
-        chromeDriver.findElement(By.cssSelector("#zipCode")).sendKeys("0123456789");
+        chromeDriver.findElement(By.cssSelector("#inputName")).sendKeys(firstName);
+        chromeDriver.findElement(By.cssSelector("#address")).sendKeys(address);
+        chromeDriver.findElement(By.cssSelector("#city")).sendKeys(city);
+        chromeDriver.findElement(By.cssSelector("#state")).sendKeys(state);
+        chromeDriver.findElement(By.cssSelector("#zipCode")).sendKeys(zipCode);
         int randomCardType = new Random().nextInt(3);
         new Select(chromeDriver.findElement(By.cssSelector("#cardType"))).selectByIndex(randomCardType);
         chromeDriver.findElement(By.cssSelector("#creditCardNumber")).sendKeys(cardNumber);
         WebElement creditCardMonth = chromeDriver.findElement(By.cssSelector("#creditCardMonth"));
         creditCardMonth.clear();
-        creditCardMonth.sendKeys("99");
+        creditCardMonth.sendKeys(cardMonth);
         WebElement creditCardYear = chromeDriver.findElement(By.cssSelector("#creditCardYear"));
         creditCardYear.clear();
-        creditCardYear.sendKeys("0000");
-        chromeDriver.findElement(By.cssSelector("#nameOnCard")).sendKeys("AndreyM");
+        creditCardYear.sendKeys(cardYear);
+        chromeDriver.findElement(By.cssSelector("#nameOnCard")).sendKeys(firstName + " " + lastName);
         chromeDriver.findElement(By.xpath("//input[@value='Purchase Flight']")).click();
-        String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
         /*
         Создаём дату с определённым форматом и изменением TimeZone на GMT 0
          */
@@ -114,7 +121,10 @@ public class SecondTest extends BaseTest {
         WebElement cardNumElem = chromeDriver.findElement(By.xpath("//*[text()='Card Number']/following-sibling::*"));
         String cardNumAct = cardNumElem.getText().replace("x", "");
         assertTrue(cardNumber.contains(cardNumAct), "Error: card number is incorrect.");
-
+        /*
+        Сравниваем даты: созданную при переходе на страницу и указанную в поле Date
+         */
+        String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
         assertEquals(dateElem, dateNow, "Cry: hard issue with '*' again false!");
 
         System.out.println("Информация о бронировании Id " + id + " не была сохранена.");
