@@ -21,7 +21,7 @@ public class SecondTest extends BaseTest {
     private String firstName = "Andrey";
     private String lastName = "Mikhaylov";
     private String address = "Street, 123";
-    private String city = "Street, 123";
+    private String city = "SPb";
     private String state = "SZFO";
     private String zipCode = "178178";
     private String cardMonth = "99";
@@ -35,6 +35,50 @@ public class SecondTest extends BaseTest {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public void setTaxes(float taxes) {
+        this.taxes = taxes;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setCardMonth(String cardMonth) {
+        this.cardMonth = cardMonth;
+    }
+
+    public void setCardYear(String cardYear) {
+        this.cardYear = cardYear;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     @Test
@@ -125,7 +169,7 @@ public class SecondTest extends BaseTest {
         Сравниваем даты: созданную при переходе на страницу и указанную в поле Date
          */
         String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
-        assertEquals(dateElem, dateNow, "Cry: hard issue with '*' again false!");
+        assertEquals(dateElem, dateNow, "Cry: date again false!");
 
         System.out.println("Информация о бронировании Id " + id + " не была сохранена.");
     }
