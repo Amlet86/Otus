@@ -28,59 +28,7 @@ public class SecondTest extends BaseTest {
     private String cardYear = "0000";
     private String cardNumber = "0123456789";
     private String currency = "USD";
-
-    public void setDeparture(String departure) {
-        this.departure = departure;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public void setTaxes(float taxes) {
-        this.taxes = taxes;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public void setCardMonth(String cardMonth) {
-        this.cardMonth = cardMonth;
-    }
-
-    public void setCardYear(String cardYear) {
-        this.cardYear = cardYear;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
+    
     @Test
     public void test() {
         /*
