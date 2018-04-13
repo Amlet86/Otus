@@ -28,7 +28,7 @@ public class SecondTest extends BaseTest {
     private String cardYear = "0000";
     private String cardNumber = "0123456789";
     private String currency = "USD";
-    
+
     @Test
     public void test() {
         /*
