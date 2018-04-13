@@ -86,16 +86,16 @@ public class SecondTest extends BaseTest {
         /*
         Выбор маршрута
          */
-        new Select(chromeDriver.findElement(By.xpath("//*[@name='fromPort']"))).selectByValue(departure);
-        new Select(chromeDriver.findElement(By.xpath("//*[@name='toPort']"))).selectByValue(destination);
-        chromeDriver.findElement(By.cssSelector("input.btn")).click();
+        new Select(driver.findElement(By.xpath("//*[@name='fromPort']"))).selectByValue(departure);
+        new Select(driver.findElement(By.xpath("//*[@name='toPort']"))).selectByValue(destination);
+        driver.findElement(By.cssSelector("input.btn")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= 'Flights from " +
                 departure + " to " + destination + ": ']")));
         /*
         Поиск самого дешевого рейса
          */
-        ArrayList<WebElement> pricesWE = (ArrayList<WebElement>) chromeDriver.findElements(By.xpath("//input[@name='price']"));
+        ArrayList<WebElement> pricesWE = (ArrayList<WebElement>) driver.findElements(By.xpath("//input[@name='price']"));
         ArrayList priceFloat = new ArrayList();
         for (WebElement price : pricesWE) {
             priceFloat.add(Float.parseFloat((price.getAttribute("value"))));
@@ -114,37 +114,36 @@ public class SecondTest extends BaseTest {
         /*
         Сравнение параметров из таблицы рейсов со страницей резервирования
          */
-        assertEquals(chromeDriver.findElement(By.xpath("//div[2]/p[1]")).getText(), "Airline: " + airline,
+        assertEquals(driver.findElement(By.xpath("//div[2]/p[1]")).getText(), "Airline: " + airline,
                 "Error: airline is incorrect.");
-        assertTrue(chromeDriver.findElement(By.xpath("//div[2]/p[2]")).getText().contains(flight),
+        assertTrue(driver.findElement(By.xpath("//div[2]/p[2]")).getText().contains(flight),
                 "Error: flight number is incorrect.");
-        assertFalse(!chromeDriver.findElement(By.xpath("//div[2]/p[3]")).getText().contains(price),
+        assertFalse(!driver.findElement(By.xpath("//div[2]/p[3]")).getText().contains(price),
                 "Error: price is incorrect.");
         /*
         Значение taxes вынесено в переменную, чтобы не переплачивать, если система подставит $100500
          */
         String totalCost = String.valueOf(Float.parseFloat(price) + taxes);
-        assertEquals(chromeDriver.findElement(By.xpath("//em")).getText(), totalCost,
+        assertEquals(driver.findElement(By.xpath("//em")).getText(), totalCost,
                 "Error: total cost is incorrect.");
         /*
         Заполняем страницу резервирования
          */
-        chromeDriver.findElement(By.cssSelector("#inputName")).sendKeys(firstName);
-        chromeDriver.findElement(By.cssSelector("#address")).sendKeys(address);
-        chromeDriver.findElement(By.cssSelector("#city")).sendKeys(city);
-        chromeDriver.findElement(By.cssSelector("#state")).sendKeys(state);
-        chromeDriver.findElement(By.cssSelector("#zipCode")).sendKeys(zipCode);
+        driver.findElement(By.cssSelector("#inputName")).sendKeys(firstName);
+        driver.findElement(By.cssSelector("#address")).sendKeys(address);
+        driver.findElement(By.cssSelector("#city")).sendKeys(city);
+        driver.findElement(By.cssSelector("#state")).sendKeys(state);
+        driver.findElement(By.cssSelector("#zipCode")).sendKeys(zipCode);
         int randomCardType = new Random().nextInt(3);
-        new Select(chromeDriver.findElement(By.cssSelector("#cardType"))).selectByIndex(randomCardType);
-        chromeDriver.findElement(By.cssSelector("#creditCardNumber")).sendKeys(cardNumber);
-        WebElement creditCardMonth = chromeDriver.findElement(By.cssSelector("#creditCardMonth"));
+        new Select(driver.findElement(By.cssSelector("#cardType"))).selectByIndex(randomCardType);
+        driver.findElement(By.cssSelector("#creditCardNumber")).sendKeys(cardNumber);
+        WebElement creditCardMonth = driver.findElement(By.cssSelector("#creditCardMonth"));
         creditCardMonth.clear();
         creditCardMonth.sendKeys(cardMonth);
-        WebElement creditCardYear = chromeDriver.findElement(By.cssSelector("#creditCardYear"));
+        WebElement creditCardYear = driver.findElement(By.cssSelector("#creditCardYear"));
         creditCardYear.clear();
         creditCardYear.sendKeys(cardYear);
-        chromeDriver.findElement(By.cssSelector("#nameOnCard")).sendKeys(firstName + " " + lastName);
-        chromeDriver.findElement(By.xpath("//input[@value='Purchase Flight']")).click();
+        driver.findElement(By.cssSelector("#nameOnCard")).sendKeys(firstName + " " + lastName);
         /*
         Создаём дату с определённым форматом и изменением TimeZone на GMT 0
          */
@@ -152,23 +151,25 @@ public class SecondTest extends BaseTest {
         formatForDateNow.setTimeZone(TimeZone.getTimeZone("GMT+0"));
         String dateNow = formatForDateNow.format(new Date());
 
+        driver.findElement(By.xpath("//input[@value='Purchase Flight']")).click();
+
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= " +
                 "'Thank you for your purchase today!']")));
         /*
         Фиксируем или проверяем элементы страницы подтверждения
          */
-        String id = chromeDriver.findElement(By.xpath("//*[text()='Id']/following-sibling::*")).getText();
+        String id = driver.findElement(By.xpath("//*[text()='Id']/following-sibling::*")).getText();
 
-        String currencyAct = chromeDriver.findElement(By.xpath("//*[text()='Amount']/following-sibling::*")).getText();
+        String currencyAct = driver.findElement(By.xpath("//*[text()='Amount']/following-sibling::*")).getText();
         assertEquals(currencyAct, currency, "Error: currency is incorrect.");
 
-        WebElement cardNumElem = chromeDriver.findElement(By.xpath("//*[text()='Card Number']/following-sibling::*"));
+        WebElement cardNumElem = driver.findElement(By.xpath("//*[text()='Card Number']/following-sibling::*"));
         String cardNumAct = cardNumElem.getText().replace("x", "");
         assertTrue(cardNumber.contains(cardNumAct), "Error: card number is incorrect.");
         /*
         Сравниваем даты: созданную при переходе на страницу и указанную в поле Date
          */
-        String dateElem = chromeDriver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
+        String dateElem = driver.findElement(By.xpath("//*[text()='Date']/following-sibling::*")).getText();
         assertEquals(dateElem, dateNow, "Cry: date again false!");
 
         System.out.println("Информация о бронировании Id " + id + " не была сохранена.");
