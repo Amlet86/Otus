@@ -34,7 +34,7 @@ public class MiddleLevelTest extends BaseLevelTest {
     String price;
     String dateNow;
 
-    @Test
+    @Test(suiteName = "smoke")
     public void findFlightsFromTo() {
         FindFlightsPage page = new FindFlightsPage(driver);
         page.setDeparture(departure);
@@ -45,7 +45,7 @@ public class MiddleLevelTest extends BaseLevelTest {
                 departure + " to " + destination + ": ']")));
     }
 
-    @Test(dependsOnMethods = "findFlightsFromTo")
+    @Test(dependsOnMethods = "findFlightsFromTo", suiteName = "smoke")
     public void reserve() {
         ReservePage page = new ReservePage(driver);
         WebElement selectedElem = page.cheapFlight();
@@ -58,7 +58,7 @@ public class MiddleLevelTest extends BaseLevelTest {
                 + departure + " to " + destination + " has been reserved.']")));
     }
 
-    @Test(dependsOnMethods = "reserve")
+    @Test(dependsOnMethods = "reserve", suiteName = "smoke")
     public void purchase() {
         PurchasePage page = new PurchasePage(driver);
         assertEquals(page.getAirlineAct(), "Airline: " + airline, "Error: airline is incorrect.");
@@ -83,7 +83,7 @@ public class MiddleLevelTest extends BaseLevelTest {
                 "'Thank you for your purchase today!']")));
     }
 
-    @Test(dependsOnMethods = "purchase")
+    @Test(dependsOnMethods = "purchase", suiteName = "smoke")
     public void confirmation() {
         ConfirmationPage page = new ConfirmationPage(driver);
         assertEquals(page.getCurrencyAct(), currency, "Error: currency is incorrect.");
