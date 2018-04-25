@@ -28,6 +28,14 @@ public class LoginPage extends AbstractPage {
         passwordFld.sendKeys(password);
     }
 
+    public String getFontSize(){
+        return loginBtn.getCssValue("font-size");
+    }
+
+    public String getPadding(){
+        return loginBtn.getCssValue("padding");
+    }
+
     public String getBackgroundColorLoginBtn (){
         return loginBtn.getCssValue("background-color");
     }
