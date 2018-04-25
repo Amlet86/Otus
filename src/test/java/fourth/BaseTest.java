@@ -1,4 +1,4 @@
-package second;
+package fourth;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,7 +22,7 @@ public class BaseTest {
         driver = new ChromeDriver(option);
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(driver, timeout);
-        driver.get("http://blazedemo.com");
+        driver.get("http://blazedemo.com/login");
     }
 
 //    @AfterClass
