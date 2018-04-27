@@ -1,5 +1,6 @@
 package fourth.Pages;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -28,19 +29,23 @@ public class LoginPage extends AbstractPage {
         passwordFld.sendKeys(password);
     }
 
-    public String getFontSize(){
+    public String getFontSizeLoginBtn() {
         return loginBtn.getCssValue("font-size");
     }
 
-    public String getPadding(){
+    public String getPaddingLoginBtn() {
         return loginBtn.getCssValue("padding");
     }
 
-    public String getBackgroundColorLoginBtn (){
+    public Dimension getSizeLoginBtn() {
+        return loginBtn.getSize();
+    }
+
+    public String getBackgroundColorLoginBtn() {
         return loginBtn.getCssValue("background-color");
     }
 
-    public void moveMouseInLoginBtn(){
+    public void moveMouseInLoginBtn() {
         Actions action = new Actions(driver);
         action.moveToElement(loginBtn).build().perform();
     }

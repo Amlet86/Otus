@@ -1,6 +1,7 @@
 package fourth;
 
 import fourth.Pages.LoginPage;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -34,11 +35,9 @@ public class FourthTest {
     @Test
     public void test() {
         LoginPage page = new LoginPage(driver);
-        String fontSizeAfter = page.getFontSize();
-        String paddingAfter = page.getPadding();
+        Dimension sizeLoginBtn = page.getSizeLoginBtn();
         page.moveMouseInLoginBtn();
-        assertEquals(page.getFontSize(), fontSizeAfter, "Error: font-size is incorrect.");
-        assertEquals(page.getPadding(), paddingAfter, "Error: padding is incorrect.");
+        assertEquals(page.getSizeLoginBtn(), sizeLoginBtn, "Error: size loginBtn is incorrect.");
         assertEquals(page.getBackgroundColorLoginBtn(), colorExp, "Error: background-color is incorrect.");
     }
 
