@@ -13,9 +13,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.21.0</version>
                 <configuration>
-                    <suitXmlFiles>
-                        <SuitXmlFile>${project.basedir}/src/test/resources/testsuite.xml</SuitXmlFile>
-                    </suitXmlFiles>
+                    <!--<suitXmlFiles>-->
+                        <!--<SuitXmlFile>${project.basedir}/src/test/resources/testsuite.xml</SuitXmlFile>-->
+                    <!--</suitXmlFiles>-->
                 </configuration>
             </plugin>
         </plugins>
@@ -35,6 +35,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>4.11.4</version>
         </dependency>
     </dependencies>
 </project>
