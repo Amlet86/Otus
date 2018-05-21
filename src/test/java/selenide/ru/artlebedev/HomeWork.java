@@ -4,9 +4,8 @@ import com.codeborne.selenide.Configuration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import selenide.ru.artlebedev.page.MainPage;
-import selenide.ru.artlebedev.page.MatrixPage;
-import selenide.ru.artlebedev.page.ToolsPage;
+
+import static selenide.ru.artlebedev.page.MainPage.enterToMainPage;
 
 public class HomeWork {
 
@@ -20,11 +19,10 @@ public class HomeWork {
 
     @Test
     public void searchInMatrix() {
-        MainPage mainPage = new MainPage();
-        mainPage = mainPage.enterToMainPage();
-        ToolsPage toolsPage = mainPage.goToToolsPage();
-        MatrixPage matrixPage = toolsPage.chooseMatrixIdea();
-        matrixPage.inputSearch(search);
-        matrixPage.checkResult(search);
+        enterToMainPage()
+                .goToToolsPage()
+                .chooseMatrixIdea()
+                .inputSearch(search)
+                .checkResult(search);
     }
 }

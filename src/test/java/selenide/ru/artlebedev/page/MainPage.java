@@ -1,16 +1,21 @@
 package selenide.ru.artlebedev.page;
 
-import static com.codeborne.selenide.Selenide.*;
+import selenide.ru.artlebedev.components.MenuBlock;
 
-public class MainPage {
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.page;
 
-    public MainPage enterToMainPage() {
+public class MainPage extends BasePage<MainPage> {
+
+    private MenuBlock menuBlock;
+
+    public static MainPage enterToMainPage() {
         open("https://www.artlebedev.ru/");
-        return this;
+        return page(MainPage.class);
     }
 
     public ToolsPage goToToolsPage() {
-        $x("//a[text() = 'Инвентарь']").click();
+        menuBlock.goToToolsPage();
         return page(ToolsPage.class);
     }
 }
