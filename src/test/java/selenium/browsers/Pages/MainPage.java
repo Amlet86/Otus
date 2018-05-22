@@ -1,6 +1,5 @@
-package selenium.fifth.Pages;
+package selenium.browsers.Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,6 +9,9 @@ public class MainPage extends AbstractPage {
 
     @FindBy(xpath = "//a[@title='Women']")
     private WebElement womenBtn;
+
+    @FindBy(xpath = "//a[@title='Women']/..//a[@title='T-shirts']")
+    private WebElement tShirtsBtn;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -21,6 +23,6 @@ public class MainPage extends AbstractPage {
     }
 
     public void tShirtsBtnClick() {
-        womenBtn.findElement(By.xpath(".//*[@title='T-shirts']")).click();
+        tShirtsBtn.click();
     }
 }

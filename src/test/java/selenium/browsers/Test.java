@@ -1,6 +1,7 @@
-package selenium.fifth;
+package selenium.browsers;
 
-import selenium.fifth.Pages.MainPage;
+import org.testng.annotations.AfterClass;
+import selenium.browsers.Pages.MainPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class FifthTest {
+public class Test {
 
     WebDriver driver;
     WebDriverWait webDriverWait;
@@ -22,24 +23,24 @@ public class FifthTest {
     @BeforeClass
     public void beforeClass() {
         ChromeOptions option = new ChromeOptions();
-        option.addArguments("start-maximized");
+        option.addArguments("headless");
         driver = new ChromeDriver(option);
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(driver, timeout);
         driver.get("http://automationpractice.com/index.php");
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void test() {
         MainPage page = new MainPage(driver);
         page.moveMouseInWomenBtn();
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Women']/../*[@title='T-shirts']")));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Women']/..//a[@title='T-shirts']")));
         page.tShirtsBtnClick();
         webDriverWait.until(ExpectedConditions.titleIs("T-shirts - My Store"));
     }
 
-//    @AfterClass
-//    public void afterClass() {
-//        driver.quit();
-//    }
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
+    }
 }

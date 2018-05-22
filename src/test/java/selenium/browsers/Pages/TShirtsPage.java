@@ -1,4 +1,4 @@
-package selenium.fifth.Pages;
+package selenium.browsers.Pages;
 
 import org.openqa.selenium.WebDriver;
 
