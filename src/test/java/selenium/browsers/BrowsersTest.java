@@ -1,9 +1,9 @@
 package selenium.browsers;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -15,16 +15,17 @@ import java.util.concurrent.TimeUnit;
 
 public class BrowsersTest {
 
-    WebDriver driver;
-    WebDriverWait webDriverWait;
+    private WebDriver driver;
+    private WebDriverWait webDriverWait;
 
     byte timeout = 10;
 
     @BeforeClass
     public void beforeClass() {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("headless");
-        driver = new ChromeDriver(option);
+        WebDriverManager.iedriver().setup();
+//        ChromeOptions option = new ChromeOptions();
+//        option.addArguments("headless");
+        driver = new InternetExplorerDriver();
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(driver, timeout);
         driver.get("http://automationpractice.com/index.php");
@@ -33,6 +34,7 @@ public class BrowsersTest {
     @Test
     public void test() {
         MainPage page = new MainPage(driver);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Women']")));
         page.moveMouseInWomenBtn();
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Women']/..//a[@title='T-shirts']")));
         page.tShirtsBtnClick();
@@ -41,6 +43,6 @@ public class BrowsersTest {
 
     @AfterClass
     public void afterClass() {
-        driver.quit();
+        if (driver != null) driver.quit();
     }
 }
