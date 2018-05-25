@@ -1,9 +1,7 @@
 package selenium.browsers;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -22,10 +20,11 @@ public class BrowsersTest {
 
     @BeforeClass
     public void beforeClass() {
-        WebDriverManager.iedriver().setup();
-//        ChromeOptions option = new ChromeOptions();
-//        option.addArguments("headless");
-        driver = new InternetExplorerDriver();
+        Browsers browsers = new Browsers();
+//        driver = browsers.chromeBrowser();
+//        driver = browsers.fireFoxBrowser();
+//        driver = browsers.operaBrowser();
+        driver = browsers.ieBrowser();
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(driver, timeout);
         driver.get("http://automationpractice.com/index.php");
