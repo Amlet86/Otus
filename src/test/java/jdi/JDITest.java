@@ -10,6 +10,8 @@ public class JDITest extends BaseTest {
     public void buyTicket() {
         findFlightsPage.open();
         findFlightsFromTo();
-
+        reserve();
+        purchase();
+        confirmation();
     }
 }
