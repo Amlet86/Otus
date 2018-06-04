@@ -1,48 +1,82 @@
 package selenium.xpath_css.Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class RamblerCSSPage extends AbstractPage {
 
-    @FindBy(xpath = "//nav[@*]")
-    private WebElement navigationBlock;
+    @FindBy(css = "[data-code='head']")
+    private WebElement headBtn;
+
+    @FindBy(css = "[data-code='mail']")
+    private WebElement mailBtn;
+
+    @FindBy(css = "[data-code='news']")
+    private WebElement newsBtn;
+
+    @FindBy(css = "[data-code='games']")
+    private WebElement gamesBtn;
+
+    @FindBy(css = "[data-code='horoscopes']")
+    private WebElement horoscopesBtn;
+
+    @FindBy(css = "[data-code='dating']")
+    private WebElement datingBtn;
+
+    @FindBy(css = "[data-code='top100']")
+    private WebElement top100Btn;
+
+    @FindBy(css = "[data-code='kassa']")
+    private WebElement kassaBtn;
+
+    @FindBy(css = ".rui-ComplexSearch-input")
+    private WebElement searchFld;
+
+    @FindBy(css = ".rui-ComplexSearch-searchButton")
+    private WebElement searchBtn;
 
     public RamblerCSSPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickHeadWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='head']")).click();
+    public void clickHead() {
+        headBtn.click();
     }
 
-    public void clickMailWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='mail']")).click();
+    public void clickMail() {
+        mailBtn.click();
     }
 
-    public void clickNewsWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='news']")).click();
+    public void clickNews() {
+        newsBtn.click();
     }
 
-    public void clickGamesWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='games']")).click();
+    public void clickGames() {
+        gamesBtn.click();
     }
 
-    public void clickHoroscopesWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='horoscopes']")).click();
+    public void clickHoroscopes() {
+        horoscopesBtn.click();
     }
 
-    public void clickDatingWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='dating']")).click();
+    public void clickDating() {
+        datingBtn.click();
     }
 
-    public void clickTop100WithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='top100']")).click();
+    public void clickTop100() {
+        top100Btn.click();
     }
 
-    public void clickKassaWithCSS() {
-        navigationBlock.findElement(By.cssSelector("[data-code='kassa']")).click();
+    public void clickKassa() {
+        kassaBtn.click();
+    }
+
+    public void inputSearch(String value) {
+        searchFld.sendKeys(value);
+    }
+
+    public void clickSearchBtn() {
+        searchBtn.click();
     }
 }
