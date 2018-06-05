@@ -37,7 +37,7 @@ public class RamblerXPathPage extends AbstractPage {
     @FindBy(xpath = "//a[contains(@data-cerber-head, 'hint')]")
     private WebElement exampleSearch;
 
-    @FindBy(xpath = "//a[contains(@data-cerber-head, 'hint')]/parent::div/ and not(a)")
+    @FindBy(xpath = "//a[contains(@data-cerber-head, 'hint')]/parent::div and not(a)")
     private WebElement headerSearch;
 
     public RamblerXPathPage(WebDriver driver) {

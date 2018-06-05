@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.xpath_css.Pages.RamblerXPathPage;
@@ -36,8 +37,8 @@ public class FixTest {
         System.out.println(text);
     }
 
-//    @AfterClass
-//    public void afterClass() {
-//        if (driver != null) driver.quit();
-//    }
+    @AfterClass
+    public void afterClass() {
+        if (driver != null) driver.quit();
+    }
 }
