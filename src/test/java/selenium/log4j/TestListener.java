@@ -7,6 +7,9 @@ import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -35,6 +38,11 @@ public class TestListener implements ITestListener {
             FileUtils.copyFile(screen, new File("target/test-classes/selenium/log4j/screen.png"));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        LogEntries logEntries = getDriver().manage().logs().get(LogType.PERFORMANCE);
+        for (LogEntry entry : logEntries) {
+            System.out.println(entry.getLevel() + " " + entry.getMessage());
         }
     }
 
