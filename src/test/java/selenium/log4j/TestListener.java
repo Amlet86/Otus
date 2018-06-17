@@ -15,7 +15,6 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.log4testng.Logger;
 
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static selenium.log4j.BaseTest.getDriver;
 
 public class TestListener implements ITestListener {

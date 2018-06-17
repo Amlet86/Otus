@@ -7,8 +7,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
@@ -36,14 +34,9 @@ public abstract class BaseTest {
         option.setCapability(CapabilityType.LOGGING_PREFS, loggingPreferences);
 
         driver = new ChromeDriver(option);
-        LogEntries logEntries = driver.manage().logs().get(LogType.PERFORMANCE);
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(driver, timeout);
         driver.get("http://blazedemo.com/");
-
-        for (LogEntry entry : logEntries) {
-            System.out.println(entry.getLevel() + " " + entry.getMessage());
-        }
     }
 
     @AfterClass
