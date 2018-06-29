@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="homework" target="1.8" />
-      <module name="Otus" target="1.5" />
+      <module name="Otus" target="7" />
     </bytecodeTargetLevel>
   </component>
 </project>
