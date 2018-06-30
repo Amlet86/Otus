@@ -23,6 +23,10 @@ public abstract class BaseTest {
 
     byte timeout = 2;
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
     @BeforeClass
     public void beforeClass() {
         WebDriverManager.chromedriver().setup();
@@ -42,10 +46,6 @@ public abstract class BaseTest {
     @AfterClass
     public void afterClass() {
         driver.quit();
-    }
-
-    public static WebDriver getDriver() {
-        return driver;
     }
 
 }

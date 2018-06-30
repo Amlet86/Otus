@@ -1,5 +1,6 @@
 package selenium.second;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,6 +19,7 @@ public class BaseTest {
 
     @BeforeClass
     public void beforeClass() {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions option = new ChromeOptions();
         option.addArguments("start-maximized");
         driver = new ChromeDriver(option);

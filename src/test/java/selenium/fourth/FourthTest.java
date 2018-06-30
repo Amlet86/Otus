@@ -1,5 +1,6 @@
 package selenium.fourth;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import selenium.fourth.Pages.LoginPage;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,7 @@ public class FourthTest {
 
     @BeforeClass
     public void beforeClass() {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions option = new ChromeOptions();
         option.addArguments("start-maximized");
         driver = new ChromeDriver(option);
