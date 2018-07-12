@@ -1,6 +1,7 @@
 package selenoid;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,13 +19,13 @@ public class BaseTest {
         capabilities.setBrowserName("chrome");
         capabilities.setVersion("67.0");
         capabilities.setCapability("enableVNC", true);
-        RemoteWebDriver driver = new RemoteWebDriver(
+        WebDriver driver = new RemoteWebDriver(
                 URI.create("http://127.0.0.1:4444/wd/hub").toURL(),
                 capabilities
         );
-        driver.get("http://blazedemo.com/");
-        driver.findElement(By.cssSelector("[value='Find Flights']")).click();
-        (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("BlazeDemo - reserve"));
+        driver.manage().window().setSize(new Dimension(1920, 1080));
+        driver.get("http://glr.lesegais.com/portal/");
+        (new WebDriverWait(driver, 600)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
 }
