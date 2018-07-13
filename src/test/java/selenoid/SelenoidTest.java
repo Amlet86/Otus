@@ -27,7 +27,7 @@ public class SelenoidTest {
         );
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get("http://glr.lesegais.com/portal/");
-        (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
+        (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
 
@@ -43,7 +43,7 @@ public class SelenoidTest {
         );
         driver.manage().window().setSize(new Dimension(1366, 768));
         driver.get("http://glr.lesegais.com/portal/");
-        (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
+        (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
 
@@ -59,7 +59,7 @@ public class SelenoidTest {
         );
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get("http://glr.lesegais.com/portal/");
-        (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
+        (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
 
@@ -75,7 +75,7 @@ public class SelenoidTest {
         );
         driver.manage().window().setSize(new Dimension(1366, 768));
         driver.get("http://glr.lesegais.com/portal/");
-        (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
+        (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
 
@@ -92,7 +92,7 @@ public class SelenoidTest {
         );
         driver.manage().window().setSize(new Dimension(1366, 768));
         driver.get("http://glr.lesegais.com/portal/");
-        (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
+        (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
 }
