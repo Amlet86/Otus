@@ -26,7 +26,7 @@ public class SelenoidTest {
                 capabilities
         );
         driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -35,14 +35,14 @@ public class SelenoidTest {
     public void testChrome2() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
-        capabilities.setVersion("67.0");
+        capabilities.setVersion("66.0");
         capabilities.setCapability("enableVNC", true);
         WebDriver driver = new RemoteWebDriver(
                 URI.create("http://127.0.0.1:4444/wd/hub").toURL(),
                 capabilities
         );
         driver.manage().window().setSize(new Dimension(1366, 768));
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -58,7 +58,7 @@ public class SelenoidTest {
                 capabilities
         );
         driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -67,14 +67,14 @@ public class SelenoidTest {
     public void testFirefox2() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("firefox");
-        capabilities.setVersion("61.0");
+        capabilities.setVersion("60.0");
         capabilities.setCapability("enableVNC", true);
         WebDriver driver = new RemoteWebDriver(
                 URI.create("http://127.0.0.1:4444/wd/hub").toURL(),
                 capabilities
         );
         driver.manage().window().setSize(new Dimension(1366, 768));
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -91,7 +91,7 @@ public class SelenoidTest {
                 capabilities
         );
         driver.manage().window().setSize(new Dimension(1366, 768));
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 300)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }

@@ -17,7 +17,7 @@ public class WithOutSelenoidTest {
         ChromeOptions option = new ChromeOptions();
         option.addArguments("start-maximized");
         WebDriver driver = new ChromeDriver(option);
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -28,7 +28,7 @@ public class WithOutSelenoidTest {
         ChromeOptions option = new ChromeOptions();
         option.addArguments("start-maximized");
         WebDriver driver = new ChromeDriver(option);
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -37,7 +37,7 @@ public class WithOutSelenoidTest {
     public void testFirefox1() {
         WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver();
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
@@ -46,7 +46,7 @@ public class WithOutSelenoidTest {
     public void testFirefox2() {
         WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver();
-        driver.get("http://glr.lesegais.com/portal/");
+        driver.get("http://blazedemo.com/");
         (new WebDriverWait(driver, 60)).until(ExpectedConditions.titleIs("xxx"));
         driver.quit();
     }
