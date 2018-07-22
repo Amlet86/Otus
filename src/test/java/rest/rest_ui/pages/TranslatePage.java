@@ -3,12 +3,15 @@ package rest.rest_ui.pages;
 import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selenide.*;
-import static rest.EndPointUrl.BESE_URL_UI;
+import static rest.EndPointUrl.BASE_URL_UI;
 
 public class TranslatePage extends BasePage<TranslatePage> {
 
-    public static TranslatePage enterToTranslatePage() {
-        open(BESE_URL_UI.getPath());
+    public static TranslatePage enterToTranslatePage(String lang) {
+        if (lang == null) {
+            open(BASE_URL_UI.getPath());
+        } else
+            open(BASE_URL_UI.getPath() + "?lang=" + lang);
         return page(TranslatePage.class);
     }
 
@@ -18,7 +21,7 @@ public class TranslatePage extends BasePage<TranslatePage> {
     }
 
     public TranslatePage compareTraslation(String translation) {
-        $(".translation-chunk").should(Condition.text(translation));
+        $(".translation-chunk").should(Condition.matchText(translation));
         return this;
     }
 
