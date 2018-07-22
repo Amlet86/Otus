@@ -7,6 +7,7 @@ public class BaseTest {
 
     @BeforeTest
     public void beforeTest() {
+        Configuration.reportsFolder = "target/rest-ui-results";
         Configuration.browser = "chrome";
     }
 }
