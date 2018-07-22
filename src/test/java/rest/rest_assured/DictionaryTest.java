@@ -1,4 +1,4 @@
-package rest;
+package rest.rest_assured;
 
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeTest;
@@ -7,11 +7,10 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
+import static rest.ApiKeys.API_KEY_DICTIONARY;
+import static rest.EndPointUrl.*;
 
 public class DictionaryTest {
-
-    private static final String API_KEY = "dict.1.1.20180721T140439Z.5bca30e704cc24ff.86803afeec18fc206a1dd196966d6c7db35f6c7e";
 
     private String getPathForLangs(String key) {
         return String.format("?key=%s", key);
@@ -23,19 +22,19 @@ public class DictionaryTest {
 
     @BeforeTest
     public void beforeTest() {
-        RestAssured.baseURI = "https://dictionary.yandex.net/api/v1/dicservice.json/";
+        RestAssured.baseURI = BASE_URL_DICTIONARY.getPath();
     }
 
     @Test
     public void getLangs() {
         RestAssured.useRelaxedHTTPSValidation();
 
-        String additionalPath = getPathForLangs(API_KEY);
+        String additionalPath = getPathForLangs(API_KEY_DICTIONARY.getApiKey());
 
         given()
 
             .when()
-            .get(EndPointUrl.GET_LANGS.addPath(additionalPath))
+            .get(LANGS.addPath(additionalPath))
             .then()
             .statusCode(200)
             .body(containsString("ru-en"));
@@ -43,12 +42,12 @@ public class DictionaryTest {
 
     @Test
     public void lookup() {
-        String additionalPath = getPathForLookup(API_KEY, "ru-en", "черный аист");
+        String additionalPath = getPathForLookup(API_KEY_DICTIONARY.getApiKey(), "ru-en", "черный аист");
 
         given()
 
             .when()
-            .get(EndPointUrl.LOOKUP.addPath(additionalPath))
+            .get(LOOKUP.addPath(additionalPath))
             .then()
             .statusCode(200)
             .body("def[0].tr[0].text", equalTo("black stork"));

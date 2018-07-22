@@ -2,8 +2,11 @@ package rest;
 
 public enum EndPointUrl {
 
+    BESE_URL_UI("https://translate.yandex.ru/"),
+    BASE_URL_TRANSLATION("https://translate.yandex.net/api/v1.5/tr.json/"),
     TRANSLATE("translate"),
-    GET_LANGS("getLangs"),
+    BASE_URL_DICTIONARY("https://dictionary.yandex.net/api/v1/dicservice.json/"),
+    LANGS("getLangs"),
     LOOKUP("lookup");
 
     String path;

@@ -1,16 +1,17 @@
-package rest;
+package rest.rest_assured;
 
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import rest.EndPointUrl;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
+import static rest.ApiKeys.API_KEY_TRANSLATE;
+import static rest.EndPointUrl.BASE_URL_TRANSLATION;
 
 public class TranslateTest {
-
-    private static final String API_KEY = "trnsl.1.1.20180721T114543Z.d58b03818313efca.51798d718478c8384510ef94555688a7d71d8091";
 
     private String getPathForTranslate(String key, String text, String languageFormat) {
         return String.format("?key=%s&text=%s&lang=%s", key, text, languageFormat);
@@ -18,14 +19,14 @@ public class TranslateTest {
 
     @BeforeTest
     public void beforeTest() {
-        RestAssured.baseURI = "https://translate.yandex.net/api/v1.5/tr.json/";
+        RestAssured.baseURI = BASE_URL_TRANSLATION.getPath();
     }
 
     @Test
     public void dictionaryTest() {
         RestAssured.useRelaxedHTTPSValidation();
 
-        String additionalPath = getPathForTranslate(API_KEY, "Аист", "ru-en");
+        String additionalPath = getPathForTranslate(API_KEY_TRANSLATE.getApiKey(), "Аист", "ru-en");
 
         given()
 
