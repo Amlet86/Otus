@@ -11,9 +11,9 @@ public class UITest extends IntegrationTest {
 
     @Test
     public void restUITest() {
-        String jsonLangs = responseLangs();
-        String lang = choiseLang(jsonLangs, userLang);
+        String lang = choiseLang(responseLangs(), userLang);
         String translation = translate(word, lang);
+
         enterToTranslatePage(lang)
             .inputWords(word)
             .compareTraslation(translation);
