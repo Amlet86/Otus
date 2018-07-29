@@ -1,30 +1,32 @@
-package cucumber;
+package cucumber.com.google;
 
 import java.util.concurrent.TimeUnit;
 
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import cucumber.com.Browsers;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GoogleSteps {
+public class GoogleSteps extends Browsers {
 
-    private WebDriver driver;
+    private byte timeOut = 10;
+
+    @Before
+    public void before() {
+        getDriver("chrome");
+        driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+    }
 
     @Given("^I am on the Google search page$")
     public void i_am_on_the_Google_search_page() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.google.com/");
     }
 
@@ -42,7 +44,7 @@ public class GoogleSteps {
     }
 
     @After
-    public void close() {
+    public void after() {
         driver.quit();
     }
 }
