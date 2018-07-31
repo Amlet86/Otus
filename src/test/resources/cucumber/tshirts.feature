@@ -7,9 +7,9 @@ Feature: TShirts
     Then The page opens My store
 
     Examples:
-      | browser  |
-      | headless |
-      | firefox  |
-      | opera    |
-      | ie       |
-      | chrome   |
+      | browser |
+      | remote  |
+      | firefox |
+      | opera   |
+      | ie      |
+      | chrome  |
