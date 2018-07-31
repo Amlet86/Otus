@@ -64,11 +64,11 @@ public class RamblerXPathPage extends AbstractPage {
         return exampleSearch.getText();
     }
 
-    public String getPriceUSD(){
+    public String getPriceUSD() {
         return priceUSD.getText();
     }
 
-    public String getHeaderSearch(){
+    public String getHeaderSearch() {
         return headerSearch.getText();
     }
 }

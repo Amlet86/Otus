@@ -20,68 +20,59 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class Browsers {
 
     private static final String PROXY_ADDRESS = "78.111.114.50:8080";
-    public static WebDriver driver;
 
-    public static WebDriver chromeDriver() {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("start-maximized");
+    private WebDriver chromeDriver(WebDriver driver) {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(option);
-        return driver;
+        return driver = new ChromeDriver();
     }
 
-    public static WebDriver chromeHeadlessDriver() {
+    private WebDriver chromeHeadlessDriver() {
         ChromeOptions option = new ChromeOptions();
         option.addArguments("headless");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(option);
-        return driver;
+        return new ChromeDriver(option);
     }
 
-    public static WebDriver chromeRemoteDriver() {
+    private WebDriver chromeRemoteDriver(WebDriver driver) {
         try {
             driver = new RemoteWebDriver(new URL("http://192.168.0.180:4444/wd/hub"), DesiredCapabilities.chrome());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        driver.manage().window().maximize();
         return driver;
     }
 
-    public static WebDriver firefoxDriver() {
+    private WebDriver firefoxDriver() {
         Proxy proxy = new Proxy();
         proxy.setHttpProxy(PROXY_ADDRESS);
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setCapability(CapabilityType.PROXY, proxy);
         WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().window().maximize();
-        return driver;
+        return new FirefoxDriver(firefoxOptions);
     }
 
-    public static WebDriver operaDriver() {
+    private WebDriver operaDriver() {
         OperaOptions option = new OperaOptions();
         option.setBinary("C:\\Program Files\\Opera\\53.0.2907.68\\opera.exe");
         WebDriverManager.operadriver().setup();
-        driver = new OperaDriver(option);
-        driver.manage().window().maximize();
-        return driver;
+        return new OperaDriver(option);
     }
 
-    public static WebDriver ieDriver() {
+    private WebDriver ieDriver() {
         WebDriverManager.iedriver().setup();
-        driver = new InternetExplorerDriver();
-        driver.manage().window().maximize();
-        return driver;
+        return new InternetExplorerDriver();
     }
 
-    public static WebDriver getDriver(String value) {
+    public WebDriver getDriver(String value, WebDriver driver) {
         switch (value) {
+            case "chrome":
+                chromeDriver(driver);
+                break;
             case "headless":
                 chromeHeadlessDriver();
                 break;
             case "remote":
-                chromeRemoteDriver();
+                chromeRemoteDriver(driver);
                 break;
             case "firefox":
                 firefoxDriver();
@@ -93,7 +84,7 @@ public class Browsers {
                 ieDriver();
                 break;
             default:
-                chromeDriver();
+                chromeDriver(driver);
                 break;
         }
         return driver;

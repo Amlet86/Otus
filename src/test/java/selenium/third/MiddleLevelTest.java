@@ -1,5 +1,7 @@
 package selenium.third;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,8 +10,6 @@ import selenium.third.Pages.ConfirmationPage;
 import selenium.third.Pages.FindFlightsPage;
 import selenium.third.Pages.PurchasePage;
 import selenium.third.Pages.ReservePage;
-
-import java.util.Random;
 
 import static org.testng.Assert.*;
 
@@ -42,7 +42,7 @@ public class MiddleLevelTest extends BaseLevelTest {
         page.findFlights();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= 'Flights from " +
-                departure + " to " + destination + ": ']")));
+            departure + " to " + destination + ": ']")));
     }
 
     @Test(dependsOnMethods = "findFlightsFromTo", suiteName = "smoke")
@@ -55,7 +55,7 @@ public class MiddleLevelTest extends BaseLevelTest {
         page.chooseFlight(selectedElem);
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= 'Your flight from "
-                + departure + " to " + destination + " has been reserved.']")));
+            + departure + " to " + destination + " has been reserved.']")));
     }
 
     @Test(dependsOnMethods = "reserve", suiteName = "smoke")
@@ -80,7 +80,7 @@ public class MiddleLevelTest extends BaseLevelTest {
         this.dateNow = page.getDateNow();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= " +
-                "'Thank you for your purchase today!']")));
+            "'Thank you for your purchase today!']")));
     }
 
     @Test(dependsOnMethods = "purchase", suiteName = "smoke")

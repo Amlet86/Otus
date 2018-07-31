@@ -1,17 +1,20 @@
 package selenium.second;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
+import java.util.TimeZone;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class SecondTest extends BaseTest {
 
@@ -39,7 +42,7 @@ public class SecondTest extends BaseTest {
         driver.findElement(By.cssSelector("input.btn")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= 'Flights from " +
-                departure + " to " + destination + ": ']")));
+            departure + " to " + destination + ": ']")));
         /*
         Поиск самого дешевого рейса
          */
@@ -58,22 +61,22 @@ public class SecondTest extends BaseTest {
         elemMin.findElement(By.xpath("./..//input[@value='Choose This Flight']")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= 'Your flight from "
-                + departure + " to " + destination + " has been reserved.']")));
+            + departure + " to " + destination + " has been reserved.']")));
         /*
         Сравнение параметров из таблицы рейсов со страницей резервирования
          */
         assertEquals(driver.findElement(By.xpath("//div[2]/p[1]")).getText(), "Airline: " + airline,
-                "Error: airline is incorrect.");
+            "Error: airline is incorrect.");
         assertTrue(driver.findElement(By.xpath("//div[2]/p[2]")).getText().contains(flight),
-                "Error: flight number is incorrect.");
+            "Error: flight number is incorrect.");
         assertFalse(!driver.findElement(By.xpath("//div[2]/p[3]")).getText().contains(price),
-                "Error: price is incorrect.");
+            "Error: price is incorrect.");
         /*
         Значение taxes вынесено в переменную, чтобы не переплачивать, если система подставит $100500
          */
         String totalCost = String.valueOf(Float.parseFloat(price) + taxes);
         assertEquals(driver.findElement(By.xpath("//em")).getText(), totalCost,
-                "Error: total cost is incorrect.");
+            "Error: total cost is incorrect.");
         /*
         Заполняем страницу резервирования
          */
@@ -102,7 +105,7 @@ public class SecondTest extends BaseTest {
         driver.findElement(By.xpath("//input[@value='Purchase Flight']")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()= " +
-                "'Thank you for your purchase today!']")));
+            "'Thank you for your purchase today!']")));
         /*
         Фиксируем или проверяем элементы страницы подтверждения
          */

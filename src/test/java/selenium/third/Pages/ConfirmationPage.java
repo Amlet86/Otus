@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ConfirmationPage extends AbstractPage{
+public class ConfirmationPage extends AbstractPage {
 
     @FindBy(xpath = "//*[text()='Id']/following-sibling::*")
     private WebElement idAct;
@@ -22,19 +22,19 @@ public class ConfirmationPage extends AbstractPage{
         super(driver);
     }
 
-    public String getId(){
+    public String getId() {
         return idAct.getText();
     }
 
-    public String getCurrencyAct(){
+    public String getCurrencyAct() {
         return currencyAct.getText();
     }
 
-    public String getCardNumberAct(){
+    public String getCardNumberAct() {
         return cardNumberAct.getText().replace("x", "");
     }
 
-    public String getDateAct(){
+    public String getDateAct() {
         return dateAct.getText();
     }
 }
