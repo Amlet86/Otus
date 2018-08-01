@@ -1,6 +1,5 @@
 package cucumber.com.automationpractice;
 
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import cucumber.api.java.After;
@@ -23,7 +22,7 @@ public class TShirtsSteps extends Browsers {
 
     @Before
     public void before() {
-        driver = getDriver("chrome");
+        driver = getDriver("remote");
     }
 
     @Given("^I am on the automationpractice page$")

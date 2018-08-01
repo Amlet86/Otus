@@ -1,6 +1,5 @@
 package cucumber.com.google;
 
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import cucumber.api.java.After;
