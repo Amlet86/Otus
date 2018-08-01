@@ -19,72 +19,44 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Browsers {
 
-    private static final String PROXY_ADDRESS = "78.111.114.50:8080";
+    private String proxy_address = "78.111.114.50:8080";
+    private String url_hub = "http://10.0.6.4:4444/wd/hub";
+    protected WebDriver driver;
 
-    private WebDriver chromeDriver(WebDriver driver) {
-        WebDriverManager.chromedriver().setup();
-        return driver = new ChromeDriver();
-    }
-
-    private WebDriver chromeHeadlessDriver() {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("headless");
-        WebDriverManager.chromedriver().setup();
-        return new ChromeDriver(option);
-    }
-
-    private WebDriver chromeRemoteDriver(WebDriver driver) {
-        try {
-            driver = new RemoteWebDriver(new URL("http://192.168.0.180:4444/wd/hub"), DesiredCapabilities.chrome());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return driver;
-    }
-
-    private WebDriver firefoxDriver() {
-        Proxy proxy = new Proxy();
-        proxy.setHttpProxy(PROXY_ADDRESS);
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability(CapabilityType.PROXY, proxy);
-        WebDriverManager.firefoxdriver().setup();
-        return new FirefoxDriver(firefoxOptions);
-    }
-
-    private WebDriver operaDriver() {
-        OperaOptions option = new OperaOptions();
-        option.setBinary("C:\\Program Files\\Opera\\53.0.2907.68\\opera.exe");
-        WebDriverManager.operadriver().setup();
-        return new OperaDriver(option);
-    }
-
-    private WebDriver ieDriver() {
-        WebDriverManager.iedriver().setup();
-        return new InternetExplorerDriver();
-    }
-
-    public WebDriver getDriver(String value, WebDriver driver) {
-        switch (value) {
+    protected WebDriver getDriver(String browser) {
+        switch (browser) {
             case "chrome":
-                chromeDriver(driver);
+                driver = new ChromeDriver();
                 break;
             case "headless":
-                chromeHeadlessDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("headless");
+                driver = new ChromeDriver(chromeOptions);
                 break;
             case "remote":
-                chromeRemoteDriver(driver);
+                try {
+                    driver = new RemoteWebDriver(new URL(url_hub), DesiredCapabilities.chrome());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "firefox":
-                firefoxDriver();
+                Proxy proxy = new Proxy();
+                proxy.setHttpProxy(proxy_address);
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setCapability(CapabilityType.PROXY, proxy);
+                driver =  new FirefoxDriver(firefoxOptions);
                 break;
             case "opera":
-                operaDriver();
+                OperaOptions operaOptions = new OperaOptions();
+                operaOptions.setBinary("C:\\Program Files\\Opera\\53.0.2907.68\\opera.exe");
+                driver = new OperaDriver(operaOptions);
                 break;
             case "ie":
-                ieDriver();
+                driver = new InternetExplorerDriver();
                 break;
             default:
-                chromeDriver(driver);
+                driver = new ChromeDriver();
                 break;
         }
         return driver;
