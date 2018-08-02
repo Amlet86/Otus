@@ -9,6 +9,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.com.Browsers;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -49,7 +50,7 @@ public class TShirtsSteps extends Browsers {
 
     @Then("^The page opens \"(.*)\" My store$")
     public void the_page_opens_my_store(String button) {
-        webDriverWait.until(ExpectedConditions.titleIs(button + " - My Store"));
+        Assert.assertTrue(driver.getTitle().contains(button));
     }
 
     @After
