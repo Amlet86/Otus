@@ -1,22 +1,18 @@
 package xss;
 
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static xss.Page.MainPage.enterToMainPage;
 
 public class DataProviderTest extends BaseTest {
 
-    @Test(dataProvider = "xssTests")
-    public void test(String name, String xssQuery) {
-
+    @Test()
+    public void xssGame() {
+        enterToMainPage()
+            .goToFirstLevel()
+            .tryInputScript(getCheatSheetAlert())
+            .acceptAlert()
+            .goToSecondLevel();
     }
 
-    @DataProvider(name = "xssTests")
-    private Object[][] xssDataProvider() {
-
-        return new Object[][]{
-            {"email", "<script>alert(\"xx\");</script>"},
-            {"email", "<script>alert(\"xx\");</script>"},
-            {"email", "<script>alert(\"xx\");</script>"}
-        };
-    }
 }
