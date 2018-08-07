@@ -5,45 +5,45 @@ import java.util.ArrayList;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
-public class FirstLevelPage extends BasePage {
+public class ThirdLevelPage extends BasePage {
 
     @FindBy(css = "iframe.game-frame")
     WebElement gameFrame;
 
-    @FindBy(css = "a")
-    WebElement tryAgain;
+    @FindBy(css = "input.urlbutton")
+    WebElement goBtn;
 
     @FindBy(css = ".next-button")
     WebElement nextButton;
 
-    public FirstLevelPage inputScriptForFirstPage(ArrayList<String> scripts) {
-        switchTo().frame(gameFrame);
+    public ThirdLevelPage inputScriptForThirdPage(ArrayList<String> scripts) {
         for (String script : scripts) {
-            $("input#query").setValue(script).pressEnter();
+            $("input.urlbar").sendKeys(script);
+            goBtn.click();
             // cratch
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (tryAgain.isDisplayed())
-                tryAgain.click();
+            if (goBtn.isDisplayed())
+                goBtn.click();
             else
                 break;
         }
         return this;
     }
 
-    public FirstLevelPage acceptAlert() {
+    public ThirdLevelPage acceptAlert() {
         baseAcceptAlert();
         return this;
     }
 
-    public SecondLevelPage goToSecondLevel() {
+    public FourthLevelPage goToFourthLevel() {
         nextButton.click();
-        return page(SecondLevelPage.class);
+        return page(FourthLevelPage.class);
     }
-
 }

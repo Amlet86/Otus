@@ -19,14 +19,14 @@ public class ResultPage extends PageObject {
     public boolean resultsIsContains(String text) {
         int countResults = results.findElements(By.cssSelector(".b-result")).size();
         int countIncludes = 0;
-        String[] arrayText = text.split(" ");
+        String[] arrayText = text.split("\\s+");
         for (WebElement result : results.findElements(By.cssSelector(".b-result"))) {
             for (String subStr : arrayText) {
-                if ($(".b-result").containsText(subStr))
+                if (result.getText().contains(subStr))
                     countIncludes++;
             }
         }
-        boolean qualityResult = (countIncludes > countResults) ? true : false;
+        boolean qualityResult = (countIncludes < countResults) ? false : true;
         return qualityResult;
     }
 }

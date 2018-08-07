@@ -41,7 +41,7 @@ public class SearchScenarioSteps {
     @Then("'(.*)' should be contained")
     public void thenResultsShouldBeDisplayed(String text) {
         if (resultPage.resultsIsContains(text))
-            System.out.println("Good Sputnik!");
-        System.out.println("Stupid Sputnik.");
+            System.out.println("Good Sputnik, because enough results!");
+        System.out.println("Stupid Sputnik, because few of the results.");
     }
 }
