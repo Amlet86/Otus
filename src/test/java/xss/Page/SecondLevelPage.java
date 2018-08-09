@@ -24,7 +24,7 @@ public class SecondLevelPage extends BasePage {
             $("#post-content").setValue(script).pressEnter();
             // cratch
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

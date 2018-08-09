@@ -10,9 +10,6 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class ThirdLevelPage extends BasePage {
 
-    @FindBy(css = "iframe.game-frame")
-    WebElement gameFrame;
-
     @FindBy(css = "input.urlbutton")
     WebElement goBtn;
 
@@ -29,9 +26,7 @@ public class ThirdLevelPage extends BasePage {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (goBtn.isDisplayed())
-                goBtn.click();
-            else
+            if (!goBtn.isDisplayed())
                 break;
         }
         return this;

