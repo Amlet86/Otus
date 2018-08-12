@@ -20,7 +20,7 @@ public class FifthLevelPage extends BasePage {
         return this;
     }
 
-    public SixthLevelPage goToSixthhLevel() {
+    public SixthLevelPage goToSixthLevel() {
         nextButton.click();
         return page(SixthLevelPage.class);
     }
