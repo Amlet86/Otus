@@ -1,6 +1,7 @@
 package xss.Page;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.page;
 
 public class MainPage extends BasePage<MainPage> {
 
@@ -10,7 +11,7 @@ public class MainPage extends BasePage<MainPage> {
     }
 
     public FirstLevelPage goToFirstLevel() {
-        $(".next-button").click();
+        nextButton.click();
         return page(FirstLevelPage.class);
     }
 }

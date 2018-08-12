@@ -9,14 +9,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SecondLevelPage extends BasePage {
 
-    @FindBy(css = "iframe.game-frame")
-    WebElement gameFrame;
-
     @FindBy(css = "input.share")
     WebElement shareStatus;
-
-    @FindBy(css = ".next-button")
-    WebElement nextButton;
 
     public SecondLevelPage inputScriptForSecondPage(ArrayList<String> scripts) {
         switchTo().frame(gameFrame);

@@ -9,14 +9,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class FirstLevelPage extends BasePage {
 
-    @FindBy(css = "iframe.game-frame")
-    WebElement gameFrame;
-
     @FindBy(css = "a")
     WebElement tryAgain;
-
-    @FindBy(css = ".next-button")
-    WebElement nextButton;
 
     public FirstLevelPage inputScriptForFirstPage(ArrayList<String> scripts) {
         switchTo().frame(gameFrame);
@@ -24,7 +18,7 @@ public class FirstLevelPage extends BasePage {
             $("input#query").setValue(script).pressEnter();
             // cratch
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -45,5 +39,4 @@ public class FirstLevelPage extends BasePage {
         nextButton.click();
         return page(SecondLevelPage.class);
     }
-
 }
